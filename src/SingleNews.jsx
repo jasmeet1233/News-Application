@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactHtmlParser from "react-html-parser";
-import { useGlobalContext } from "./context";
 import {AiFillHome} from 'react-icons/ai'
 
 
@@ -42,7 +40,14 @@ const SingleNews = () => {
         <div className="line"></div>
         <div className="comments"></div>
         {newsInfo.children.map((item) => {
-          return <div className="comments" key = {item.id}>{ReactHtmlParser(item.text)}</div>;
+          return (
+            <div
+              className="comments"
+              key={item.id}
+              dangerouslySetInnerHTML={{ __html: item.text }}
+            >
+            </div>
+          );
         })}
       </div>
     </>
