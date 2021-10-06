@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useGlobalContext } from "./context";
 import { FcSearch } from "react-icons/fc";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
+  const { searchHandler, query, getNews, setLoading } = useGlobalContext();
+  const isFirstRun = useRef(true);
 
-  const { searchHandler, query } = useGlobalContext();
   return (
     <form
       className="search-form"
@@ -15,15 +16,12 @@ const SearchBar = () => {
       }}
     >
       <h2>Search HackerNews</h2>
-      <div className = 'parent-flex'>
+      <div className="parent-flex">
         <input
           type="text"
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => searchHandler(e.target.value)}
           className="form-input"
         />
-        <button type="submit" className="searchBtn">
-          <FcSearch size={30} />
-        </button>
       </div>
     </form>
   );

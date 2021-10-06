@@ -7,7 +7,6 @@ const SingleNews = () => {
     const [newsInfo, setNewsInfo] = useState([]);
     const [loading, setLoading] = useState('true')
     const {id} = useParams();
-    console.log(id);
 
     const getSingleNews = async(id) => {
         const response = await fetch(
@@ -23,7 +22,12 @@ const SingleNews = () => {
     },[])
 
 
+    //Data return
+
     if(loading) return <div className = 'loading'></div>
+
+    const filteredStuff = newsInfo.children.filter((item) => item.text !== '');
+    console.log(filteredStuff)
   return (
     <>
       <Link to="/">
@@ -39,7 +43,7 @@ const SingleNews = () => {
         <h5>Comments</h5>
         <div className="line"></div>
         <div className="comments"></div>
-        {newsInfo.children.map((item) => {
+        {filteredStuff.map((item) => {
           return (
             <div
               className="comments"

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const NewsList = () => {
   const { query, isLoading, news, isError } = useGlobalContext();
 
+  //Returning Data
   if (isLoading) return <div className="loading"></div>;
-
   if (isError) return <div>Something went Wrong</div>;
 
   return (

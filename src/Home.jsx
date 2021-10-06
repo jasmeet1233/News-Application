@@ -6,10 +6,6 @@ import { useGlobalContext } from './context'
 const Home = () => {
   const {query, getNews} = useGlobalContext()
 
-  useEffect(() => {
-    getNews('React')
-  },[])
-
     return (
         <div> 
           <SearchBar />
