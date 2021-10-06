@@ -5,7 +5,6 @@ import { FcSearch } from "react-icons/fc";
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const { searchHandler, query, getNews, setLoading } = useGlobalContext();
-  const isFirstRun = useRef(true);
 
   return (
     <form
@@ -15,7 +14,7 @@ const SearchBar = () => {
         searchHandler(searchText);
       }}
     >
-      <h2>Search HackerNews</h2>
+      <h2>Search HackerNews......</h2>
       <div className="parent-flex">
         <input
           type="text"
