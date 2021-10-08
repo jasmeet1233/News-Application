@@ -1,20 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useGlobalContext } from "./context";
-import { FcSearch } from "react-icons/fc";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
-  const { searchHandler, query, getNews, setLoading } = useGlobalContext();
+  const { searchHandler } = useGlobalContext();
 
   return (
     <form
       className="search-form"
       onSubmit={(e) => {
         e.preventDefault();
-        searchHandler(searchText);
       }}
     >
-      <h2>Search HackerNews......</h2>
+      <h2>Search HackerNews....</h2>
       <div className="parent-flex">
         <input
           type="text"
