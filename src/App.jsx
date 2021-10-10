@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Home';
-import SingleNews from './SingleNews';
+import SingleNews from './components/SingleNews';
 
 function App() {
   return (

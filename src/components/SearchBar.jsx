@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from '../Globalstate/context'
 import { useAuth0 } from "@auth0/auth0-react";
 
 const SearchBar = () => {
-  const [searchText, setSearchText] = useState("");
   const { searchHandler } = useGlobalContext();
 
   return (

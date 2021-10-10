@@ -23,7 +23,6 @@ const SingleNews = () => {
 
 
     //Data return
-
     if(loading) return <div className = 'loading'></div>
 
     const filteredStuff = newsInfo.children.filter((item) => item.text !== '');
@@ -40,6 +39,9 @@ const SingleNews = () => {
         <h5 className="info info-p">
           By {newsInfo.author} | {newsInfo.points} Points
         </h5>
+        <p>
+          News URL: <a href={newsInfo.url}>{newsInfo.url}</a>
+        </p>
         <h5>Comments</h5>
         <div className="line"></div>
         <div className="comments"></div>
@@ -49,8 +51,7 @@ const SingleNews = () => {
               className="comments"
               key={item.id}
               dangerouslySetInnerHTML={{ __html: item.text }}
-            >
-            </div>
+            ></div>
           );
         })}
       </div>

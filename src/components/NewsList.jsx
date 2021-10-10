@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../Globalstate/context";
 import { Link } from "react-router-dom";
 
 const NewsList = () => {

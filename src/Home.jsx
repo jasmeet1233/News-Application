@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
-import NewsList from './NewsList'
-import SearchBar from './SearchBar'
-import { useGlobalContext } from './context'
+import NewsList from './components/NewsList'
+import SearchBar from './components/SearchBar'
 
 const Home = () => {
-  const {query, getNews} = useGlobalContext()
-
     return (
         <div> 
           <SearchBar />

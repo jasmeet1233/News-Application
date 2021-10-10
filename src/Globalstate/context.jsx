@@ -3,6 +3,7 @@ import { reducer } from "./reducer";
 import axios from "axios";
 
 const url = `https://hn.algolia.com/api/v1/search?`;
+const frontPageUrl = 'https://hn.algolia.com/api/v1/search?tags=front_page';
 const CancelToken = axios.CancelToken;
 
 const initialState = {
@@ -16,16 +17,15 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  // const firstLoad = useRef(true);
   const cancelSource = useRef(null);
 
-  const getNews = async (queryData, page) => {
+  const getNews = async (queryData = "", page = 0) => {
     cancelSource.current = CancelToken.source();
-
     try {
-      const data = await axios.get(`${url}query=${queryData}&page=${page}`, {
-        cancelToken: cancelSource.current.token,
-      });
+        const data = await axios.get(`${url}query=${queryData}&page=${page}`, {
+          cancelToken: cancelSource.current.token,
+        });
       console.log(data);
       if (data.status === 200) {
         dispatch({ type: "FetchSuccess", payload: data.data.hits });
@@ -49,9 +49,9 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     setLoading();
     getNews(state.query, state.page);
-     return () => {
-       cancelSource.current.cancel();
-     };
+    return () => {
+      cancelSource.current.cancel();
+    };
   }, [state.query]);
 
   return (
@@ -65,4 +65,4 @@ const useGlobalContext = () => {
   return useContext(AppContext);
 };
 
-export { useGlobalContext, AppProvider };
+export { useGlobalContext, AppProvider};
