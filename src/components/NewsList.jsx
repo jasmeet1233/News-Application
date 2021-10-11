@@ -8,7 +8,7 @@ const NewsList = () => {
   //Returning Data
   if (isLoading) return <div className="loading"></div>;
   if (isError) return <div>Something went Wrong</div>;
-
+  
   return (
     <section className="stories">
       {news.map((item) => {

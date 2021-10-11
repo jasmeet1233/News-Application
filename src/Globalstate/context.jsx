@@ -10,6 +10,7 @@ const initialState = {
   query: "React",
   news: [],
   page: 0,
+  nbPages: 0,
   isLoading: true,
   isError: false,
 };
@@ -27,8 +28,9 @@ const AppProvider = ({ children }) => {
           cancelToken: cancelSource.current.token,
         });
       console.log(data);
+      console.log(data.data)
       if (data.status === 200) {
-        dispatch({ type: "FetchSuccess", payload: data.data.hits });
+        dispatch({ type: "FetchSuccess", payload: data.data});
       } else {
         throw new Error("");
       }
@@ -46,6 +48,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "Set_Loading" });
   };
 
+  const paginate = (cmd) => {
+    dispatch({ type: "PAGINATE", pageCommand: cmd});
+  }
+
   useEffect(() => {
     setLoading();
     getNews(state.query, state.page);
@@ -55,7 +61,7 @@ const AppProvider = ({ children }) => {
   }, [state.query]);
 
   return (
-    <AppContext.Provider value={{ ...state, searchHandler, getNews }}>
+    <AppContext.Provider value={{ ...state, searchHandler, getNews, setLoading, paginate }}>
       {children}
     </AppContext.Provider>
   );
