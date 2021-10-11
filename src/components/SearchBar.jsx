@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Pagination_btn from "./Pagination_btn";
 
 const SearchBar = () => {
-  const { searchHandler } = useGlobalContext();
+  const { searchHandler, getNews, query, setLoading } = useGlobalContext();
 
   return (
     <form
@@ -13,7 +13,9 @@ const SearchBar = () => {
         e.preventDefault();
       }}
     >
-      <h2>Search HackerNews....</h2>
+      <h2 onClick={() => {
+        setLoading()
+        getNews(query, 0)}}>Search HackerNews....</h2>
       <div className="parent-flex">
         <input
           type="text"
