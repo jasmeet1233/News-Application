@@ -3,12 +3,20 @@ import { useGlobalContext } from "../Globalstate/context";
 import { Link } from "react-router-dom";
 
 const NewsList = () => {
-  const { query, isLoading, news, isError } = useGlobalContext();
+  const { query, isLoading, news, isError, sort } = useGlobalContext();
 
   //Returning Data
   if (isLoading) return <div className="loading"></div>;
   if (isError) return <div>Something went Wrong</div>;
   
+  useEffect(() => {
+    if(sort === 'num_comments'){
+      filterPerPage("num_comments");
+    } else {
+      return
+    }
+  })
+
   return (
     <section className="stories">
       {news.map((item) => {

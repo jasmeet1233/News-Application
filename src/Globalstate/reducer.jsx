@@ -21,4 +21,7 @@ export const reducer = (state, action) => {
       return { ...state, page: state.page + 1 };
     else return { ...state, page: state.page - 1 };
   }
+  if(action.type === 'Filter'){
+    return {...state, news: action.payload, filter: action.condition}
+  }
 };

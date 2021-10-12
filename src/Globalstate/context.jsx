@@ -13,6 +13,7 @@ const initialState = {
   nbPages: 0,
   isLoading: true,
   isError: false,
+  sort: 'relevance'
 };
 const AppContext = React.createContext();
 
@@ -52,6 +53,17 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "PAGINATE", pageCommand: cmd});
   }
 
+  const sortData = (data, condition) => {
+    dispatch({ type: "Filter", payload: data, condition });
+  }
+
+   const filterPerPage = (sortCondition) => {
+     const updated_arr = state.news.sort(
+       (a, b) => b[sortCondition] - a[sortCondition]
+     );
+     sortData(updated_arr, sortCondition);
+   };
+
   useEffect(() => {
     setLoading();
     getNews(state.query, state.page);
@@ -61,7 +73,17 @@ const AppProvider = ({ children }) => {
   }, [state.query]);
 
   return (
-    <AppContext.Provider value={{ ...state, searchHandler, getNews, setLoading, paginate }}>
+    <AppContext.Provider
+      value={{
+        ...state,
+        searchHandler,
+        getNews,
+        setLoading,
+        paginate,
+        sortData,
+        filterPerPage,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
