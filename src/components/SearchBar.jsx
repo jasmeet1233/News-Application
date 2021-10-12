@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useGlobalContext } from '../Globalstate/context'
-import { useAuth0 } from "@auth0/auth0-react";
+import { useGlobalContext } from "../Globalstate/context";
 import Pagination_btn from "./Pagination_btn";
+import Filter from "./Filter";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const SearchBar = () => {
   const { searchHandler, getNews, query, setLoading } = useGlobalContext();
@@ -13,9 +14,14 @@ const SearchBar = () => {
         e.preventDefault();
       }}
     >
-      <h2 onClick={() => {
-        setLoading()
-        getNews(query, 0)}}>Search HackerNews....</h2>
+      <h1
+        onClick={() => {
+          setLoading();
+          getNews(query, 0);
+        }}
+      >
+        Search HackerNews....
+      </h1>
       <div className="parent-flex">
         <input
           type="text"
@@ -23,6 +29,9 @@ const SearchBar = () => {
           className="form-input"
         />
       </div>
+      {/* <ChakraProvider> */}
+      <Filter />
+      {/* </ChakraProvider> */}
       <Pagination_btn />
     </form>
   );

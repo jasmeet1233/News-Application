@@ -18,7 +18,7 @@ const Pagination_btn = () => {
       ? toggleBtnUX(true, nextBtn)
       : toggleBtnUX(false, nextBtn);
       
-    page === 0 ? toggleBtnUX(true, prevBtn) : toggleBtnUX(true, prevBtn);
+    page === 0 ? toggleBtnUX(true, prevBtn) : toggleBtnUX(false, prevBtn);
   }, [page]);
 
   const paginateHandler = (cmd) => {

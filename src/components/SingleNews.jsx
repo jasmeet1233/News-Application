@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {AiFillHome} from 'react-icons/ai'
-
+import { AiFillHome } from "react-icons/ai";
 
 const SingleNews = () => {
-    const [newsInfo, setNewsInfo] = useState([]);
-    const [loading, setLoading] = useState('true')
-    const {id} = useParams();
+  const [newsInfo, setNewsInfo] = useState([]);
+  const [loading, setLoading] = useState("true");
+  const { id } = useParams();
 
-    const getSingleNews = async(id) => {
-        const response = await fetch(
-          `https://hn.algolia.com/api/v1/items/${id}`
-        );
-        const data = await response.json()
-        setNewsInfo(data)
-        setLoading(false)
-    }
-    
-    useEffect(() => {
-        getSingleNews(id)
-    },[])
+  const getSingleNews = async (id) => {
+    const response = await fetch(`https://hn.algolia.com/api/v1/items/${id}`);
+    const data = await response.json();
+    setNewsInfo(data);
+    setLoading(false);
+  };
 
+  useEffect(() => {
+    getSingleNews(id);
+  }, []);
 
-    //Data return
-    if(loading) return <div className = 'loading'></div>
+  //Data return
+  if (loading) return <div className="loading"></div>;
 
-    const filteredStuff = newsInfo.children.filter((item) => item.text !== '');
-    console.log(filteredStuff)
+  const filteredStuff = newsInfo.children.filter((item) => item.text !== "");
+  console.log(filteredStuff);
   return (
     <>
       <Link to="/">
