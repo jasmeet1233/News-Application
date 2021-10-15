@@ -3,7 +3,7 @@ import { reducer } from "./reducer";
 import axios from "axios";
 
 const url = `https://hn.algolia.com/api/v1/search?`;
-const frontPageUrl = 'https://hn.algolia.com/api/v1/search?tags=front_page';
+const frontPageUrl = "https://hn.algolia.com/api/v1/search?tags=front_page";
 const CancelToken = axios.CancelToken;
 
 const initialState = {
@@ -13,7 +13,10 @@ const initialState = {
   nbPages: 0,
   isLoading: true,
   isError: false,
-  sort: 'relevance'
+  sort: "relevance",
+  isSignedIn: false,
+  userData: "",
+  bookmarkData: []
 };
 const AppContext = React.createContext();
 
@@ -25,13 +28,21 @@ const AppProvider = ({ children }) => {
   const getNews = async (queryData = "", page = 0) => {
     cancelSource.current = CancelToken.source();
     try {
-        const data = await axios.get(`${url}query=${queryData}&page=${page}`, {
-          cancelToken: cancelSource.current.token,
-        });
+      const data = await axios.get(`${url}query=${queryData}&page=${page}`, {
+        cancelToken: cancelSource.current.token,
+      });
       console.log(data);
-      console.log(data.data)
+      console.log(data.data);
       if (data.status === 200) {
-        dispatch({ type: "FetchSuccess", payload: data.data});
+        if (state.sort === "num_comments") {
+          let badaData = data.data;
+          badaData.hits = badaData.hits.sort(
+            (a, b) => b["num_comments"] - a["num_comments"]
+          );
+          dispatch({ type: "FetchSuccess", payload: badaData });
+        } else {
+          dispatch({ type: "FetchSuccess", payload: data.data });
+        }
       } else {
         throw new Error("");
       }
@@ -50,19 +61,38 @@ const AppProvider = ({ children }) => {
   };
 
   const paginate = (cmd) => {
-    dispatch({ type: "PAGINATE", pageCommand: cmd});
-  }
+    dispatch({ type: "PAGINATE", pageCommand: cmd });
+  };
 
-  const sortData = (data, condition) => {
-    dispatch({ type: "Filter", payload: data, condition });
-  }
+  const toggleSort = (para) => {
+    if (para === "num_comments") {
+      let badaData = state.news.sort(
+        (a, b) => b["num_comments"] - a["num_comments"]
+      );
+      dispatch({
+        type: "TOGGLE_SORT",
+        payload: { data: badaData, sortType: para },
+      });
+    } else {
+      let badaData = state.news.sort((a, b) => b["points"] - a["points"]);
+      dispatch({
+        type: "TOGGLE_SORT",
+        payload: { data: badaData, sortType: para },
+      });
+    }
+  };
 
-   const filterPerPage = (sortCondition) => {
-     const updated_arr = state.news.sort(
-       (a, b) => b[sortCondition] - a[sortCondition]
-     );
-     sortData(updated_arr, sortCondition);
-   };
+  const signInHandler = (data) => {
+    dispatch({ type: "SIGN_IN", payload: data });
+  };
+
+  const signOutHandler = () => {
+    dispatch({ type: "SIGN_OUT"});
+  };
+
+  const add2fav = (data) => {
+    dispatch({ type: 'ADD_BOOKMARK',  payload: data});
+  }
 
   useEffect(() => {
     setLoading();
@@ -80,8 +110,10 @@ const AppProvider = ({ children }) => {
         getNews,
         setLoading,
         paginate,
-        sortData,
-        filterPerPage,
+        toggleSort,
+        signInHandler,
+        signOutHandler,
+        add2fav,
       }}
     >
       {children}
@@ -93,4 +125,4 @@ const useGlobalContext = () => {
   return useContext(AppContext);
 };
 
-export { useGlobalContext, AppProvider};
+export { useGlobalContext, AppProvider };

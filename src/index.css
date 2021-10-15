@@ -1,4 +1,3 @@
-
 :root {
   /* dark shades of primary color*/
   --clr-primary-1: hsl(205, 86%, 17%);
@@ -53,8 +52,8 @@
   box-sizing: border-box;
 }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: var(--clr-grey-10);
   color: var(--clr-grey-1);
   line-height: 1.5;
@@ -138,7 +137,7 @@ Search
   width: 90vw;
   max-width: var(--max-width);
   margin: 0 auto;
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
 }
 .form-input {
@@ -156,53 +155,66 @@ Search
 }
 
 .parent-flex {
-    display: flex;
+  display: flex;
 }
 
 .searchBtn {
-    margin-left: .9rem;
-    background-color: transparent;
-    border-style: none;
-    margin-top: 1.3rem;
+  margin-left: 0.9rem;
+  background-color: transparent;
+  border-style: none;
+  margin-top: 1.3rem;
 }
 
 .searchBtn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
+.top-nav {
+  display: flex;
+  justify-content: center;
+  max-width: 650px;
+  margin: auto;
+}
+
+.bookmark {
+  color: var(--clr-primary-5);
+}
+
+.bookmarkData {
+  margin-top: 3rem;
+}
 
 /*     Single New       */
-.news-parent{
-    padding: 1rem;
-    text-align: center;
-    padding-top: .2rem;
+.news-parent {
+  padding: 1rem;
+  text-align: center;
+  padding-top: 0.2rem;
 }
 
 .info-p {
-    padding: .8rem;
+  padding: 0.8rem;
 }
 
 .comments {
-    text-align: start;
-    border-radius: 1.5rem;
-    padding: .4rem;
-    margin: 1rem;
-    overflow: hidden;
-    background-color: var(--clr-white);
+  text-align: start;
+  border-radius: 1.5rem;
+  padding: 0.4rem;
+  margin: 1rem;
+  overflow: hidden;
+  background-color: var(--clr-white);
 }
 
-
 .line {
-    width: 100%;
+  width: 100%;
   border: none;
   border-bottom: 3px solid var(--clr-grey-8);
-  padding: .2rem;
+  padding: 0.2rem;
   margin-bottom: 1rem;
 }
 
 .home {
-    padding-top: 1rem;
-    padding-left: 1.4rem;
+  padding-top: 1rem;
+  padding-left: 1.4rem;
 }
 
 /*
@@ -215,7 +227,6 @@ Buttons
   width: 90vw;
   max-width: var(--max-width);
   margin: 0 auto;
-  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,8 +252,6 @@ Buttons
 .btn-container button:disabled {
   cursor: not-allowed;
 }
-
-
 
 /*
 =============== 

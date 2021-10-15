@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 
+
 const SingleNews = () => {
   const [newsInfo, setNewsInfo] = useState([]);
   const [loading, setLoading] = useState("true");

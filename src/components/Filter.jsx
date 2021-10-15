@@ -1,36 +1,57 @@
-import React,{useState} from "react";
-import {
-  Menu,
-  Button,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Menu, Button, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useGlobalContext } from "../Globalstate/context";
 
 const Filter = () => {
-  const [condition, setCondition] = useState('Relevance')
-  const {news, sortData, sort} = useGlobalContext()
-    const filterHandler = (sortCondition) => {
-      const updated_arr = news.sort((a, b) => b[sortCondition] - a[sortCondition]);
-      sortCondition === "num_comments"
-        ? setCondition("Popularity")
-        : setCondition("Relevance");
-      sortData(updated_arr, sortCondition)
-    }
+  const { sort, toggleSort } = useGlobalContext();
 
   return (
-    <div>
+    <div style = {{paddingTop: '20px'}}>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          <span>Sort By: {condition}</span>
+        <MenuButton
+          as={Button}
+          rightIcon={<ChevronDownIcon />}
+          style={{
+            height: "35px",
+            backgroundColor: "transparent",
+            border: "none",
+            fontSize: '17px'
+          }}
+        >
+          <span>
+            Sort By: {sort === "num_comments" ? "Popularity" : "Relevance"}
+          </span>
         </MenuButton>
-        <MenuList>
-          <MenuItem onClick={() => filterHandler("points")}>
+        <MenuList
+          style={{
+            marginTop: "-13px",
+            position: "absolute",
+            left: "55px",
+            borderLeft: '1px solid grey',
+            borderBottom : '1px solid grey'
+          }}
+        >
+          <MenuItem
+            onClick={() => toggleSort("points")}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              fontSize: "15.5px",
+              padding: "4px",
+            }}
+          >
             Relevance
           </MenuItem>
-          <MenuItem onClick={() => filterHandler("num_comments")}>
+          <MenuItem
+            onClick={() => toggleSort("num_comments")}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              fontSize: "15.5px",
+              padding: "4px",
+            }}
+          >
             Popularity
           </MenuItem>
         </MenuList>

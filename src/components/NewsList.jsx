@@ -3,23 +3,20 @@ import { useGlobalContext } from "../Globalstate/context";
 import { Link } from "react-router-dom";
 
 const NewsList = () => {
-  const { query, isLoading, news, isError, sort } = useGlobalContext();
+  const {
+    isLoading,
+    news,
+    isError,
+    add2fav,
+  } = useGlobalContext();
 
   //Returning Data
   if (isLoading) return <div className="loading"></div>;
   if (isError) return <div>Something went Wrong</div>;
-  
-  useEffect(() => {
-    if(sort === 'num_comments'){
-      filterPerPage("num_comments");
-    } else {
-      return
-    }
-  })
 
   return (
     <section className="stories">
-      {news.map((item) => {
+      {news.map((item, index) => {
         return (
           <div key={item.objectID} className="story">
             <h4>{item.title}</h4>
@@ -27,9 +24,23 @@ const NewsList = () => {
               {item.points} points | By {item.author} | {item.num_comments}{" "}
               comments{" "}
             </p>
-            <Link to={`/${item.objectID}`} className="read-link">
-              Read More
-            </Link>
+            <div>
+              <Link to={`/${item.objectID}`} className="read-link">
+                Read More
+              </Link>
+              <button
+                style={{ backgroundColor: "transparent", border: "none" }}
+                className="read-link"
+                onClick={() => {
+                  add2fav(news[index]);
+                }}
+              >
+                {/* <BsFillBookmarkCheckFill
+                  style={{ color: "grey" }}
+                  size={19} /> */}
+                Bookmark
+              </button>
+            </div>
           </div>
         );
       })}

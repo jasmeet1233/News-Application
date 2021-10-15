@@ -14,7 +14,7 @@ const Pagination_btn = () => {
   };
 
   useEffect(() => {
-    page - 1 === nbPages
+    page  === nbPages - 1
       ? toggleBtnUX(true, nextBtn)
       : toggleBtnUX(false, nextBtn);
       
@@ -30,13 +30,13 @@ const Pagination_btn = () => {
   return (
     <span className="btn-container">
       <button
-        className="btn-container button"
+        className="button"
         onClick={() => paginateHandler("prev")}
         ref={prevBtn}
       >{`<`}</button>
       <p className=".btn-container p">{page + 1}</p>
       <button
-        className="btn-container button"
+        className=" button"
         onClick={() => paginateHandler("next")}
         ref={nextBtn}
       >{`>`}</button>
