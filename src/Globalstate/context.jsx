@@ -3,7 +3,6 @@ import { reducer } from "./reducer";
 import axios from "axios";
 
 const url = `https://hn.algolia.com/api/v1/search?`;
-const frontPageUrl = "https://hn.algolia.com/api/v1/search?tags=front_page";
 const CancelToken = axios.CancelToken;
 
 const initialState = {
@@ -31,8 +30,6 @@ const AppProvider = ({ children }) => {
       const data = await axios.get(`${url}query=${queryData}&page=${page}`, {
         cancelToken: cancelSource.current.token,
       });
-      console.log(data);
-      console.log(data.data);
       if (data.status === 200) {
         if (state.sort === "num_comments") {
           let badaData = data.data;

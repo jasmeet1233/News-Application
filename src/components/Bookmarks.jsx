@@ -5,7 +5,7 @@ import { AiFillHome } from "react-icons/ai";
 
 const Bookmarks = () => {
   const { bookmarkData } = useGlobalContext();
-
+  
   if (bookmarkData.length === 0) {
     return (
       <>
