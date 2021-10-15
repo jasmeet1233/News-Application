@@ -29,6 +29,7 @@ const Bookmarks = () => {
           <AiFillHome size={23} />
         </div>
       </Link>
+      <h3 className = 'bookmark_heading'>My Bookmarks</h3>
       <section className="stories bookmarkData">
         {bookmarkData.map((item, index) => {
           return (

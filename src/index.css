@@ -184,6 +184,11 @@ Search
   margin-top: 3rem;
 }
 
+.bookmark_heading {
+  padding: .5rem;
+  text-align: center;
+}
+
 /*     Single New       */
 .news-parent {
   padding: 1rem;
