@@ -6,5 +6,6 @@ Features:
 3) Filtering news
 4) Saving News
 
-Integrated the API provided by HackerNews
+Integrated the API provided by HackerNews.
+
 Project hosted on: https://newsappjsr.netlify.app/
