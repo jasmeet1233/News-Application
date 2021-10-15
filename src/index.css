@@ -189,6 +189,10 @@ Search
   text-align: center;
 }
 
+.read-link:hover {
+  cursor: pointer;
+}
+
 /*     Single New       */
 .news-parent {
   padding: 1rem;
