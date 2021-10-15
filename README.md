@@ -7,4 +7,4 @@ Features:
 4) Saving News
 
 Integrated the API provided by HackerNews
-
+Project hosted on: https://newsappjsr.netlify.app/
